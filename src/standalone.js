@@ -63,17 +63,16 @@ function standalone(options) {
   return Promise.resolve()
     .then(() =>
       globby(patterns, {
+        absolute: true,
         dot: true,
-        ignore: [`!{**/*,*}.{${ignoredExtensions}}`],
-        nodir: true
+        ignore: [`!({**/*,*}.{${ignoredExtensions}})`],
+        onlyFiles: true
       })
     )
     .then(filePaths => {
       // The ignorer filter needs to check paths relative to cwd
-      const filteredFilePaths = ignorer.filter(
-        // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
-        filePaths.map(filePath => path.relative(process.cwd(), filePath))
-      );
+      // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
+      const filteredFilePaths = ignorer.filter(filePaths);
 
       if (filteredFilePaths.length === 0) {
         return [];

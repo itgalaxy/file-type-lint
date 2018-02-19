@@ -3,7 +3,9 @@
 const linters = require("..");
 
 describe("linters", () => {
-  test("are exported", () => {
+  it("are exported", () => {
+    expect.assertions(3);
+
     expect(linters.svgLinter).not.toBeNull();
     expect(linters.xmlLinter).not.toBeNull();
     expect(linters.yamlLinter).not.toBeNull();
