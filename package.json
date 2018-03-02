@@ -114,7 +114,7 @@
   "main": "index.js",
   "dependencies": {
     "meow": "^4.0.0",
-    "get-stdin": "^5.0.1",
+    "get-stdin": "^6.0.0",
     "ignore": "^3.3.7",
     "globby": "^8.0.1",
     "file-type": "^7.4.0",
