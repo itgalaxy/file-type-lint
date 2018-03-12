@@ -6,7 +6,7 @@
 [![devDependencies Status](https://david-dm.org/itgalaxy/file-type-lint/dev-status.svg)](https://david-dm.org/itgalaxy/file-type-lint?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/file-type-lint.svg)](https://greenkeeper.io)
 
-Lint file types based on content.
+Lint file types based on their content.
 
 ## Installation
 

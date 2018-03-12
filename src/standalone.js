@@ -65,8 +65,7 @@ function standalone(options) {
       globby(patterns, {
         absolute: true,
         dot: true,
-        // Need resolve https://github.com/mrmlnc/fast-glob/issues/69
-        ignore: [`!({**/*,*}.{${ignoredExtensions}})`],
+        ignore: [`!{**/*,*}.{${ignoredExtensions}}`],
         onlyFiles: true
       })
     )
