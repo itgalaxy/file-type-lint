@@ -113,7 +113,7 @@
   "bugs": "https://github.com/itgalaxy/file-type-lint/issues",
   "main": "index.js",
   "dependencies": {
-    "meow": "^4.0.0",
+    "meow": "^5.0.0",
     "get-stdin": "^6.0.0",
     "ignore": "^3.3.7",
     "globby": "^7.0.0",
