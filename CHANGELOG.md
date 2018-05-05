@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 1.0.2 - 2018-05-05
+
+* Chore: minimum required `meow` version is now `5.0.0`.
+
 ## 1.0.1 - 2018-03-12
 
 * Revert: minimum required `globby` version is now `^7.1.1`.

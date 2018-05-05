@@ -1,6 +1,6 @@
 {
   "name": "file-type-lint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lint file types based on content",
   "keywords": [
     "mime",
@@ -113,7 +113,7 @@
   "bugs": "https://github.com/itgalaxy/file-type-lint/issues",
   "main": "index.js",
   "dependencies": {
-    "meow": "^4.0.0",
+    "meow": "^5.0.0",
     "get-stdin": "^6.0.0",
     "ignore": "^3.3.7",
     "globby": "^7.0.0",
@@ -129,7 +129,7 @@
     "eslint": "^4.1.1",
     "eslint-plugin-ava": "^4.2.1",
     "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-itgalaxy": "^66.0.0",
+    "eslint-plugin-itgalaxy": "^67.0.0",
     "eslint-plugin-jest": "^21.1.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-lodash": "^2.4.3",
