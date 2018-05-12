@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 1.1.0 - 2018-05-12
+
+* Added: `mp2`, `qcp`, `heic`, `ogx`, `spx`, `ogm`, `ogv` extensions support.
+
 ## 1.0.2 - 2018-05-05
 
 * Chore: minimum required `meow` version is now `5.0.0`.
