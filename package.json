@@ -122,7 +122,7 @@
   "dependencies": {
     "meow": "^5.0.0",
     "get-stdin": "^6.0.0",
-    "ignore": "^3.3.7",
+    "ignore": "^4.0.0",
     "globby": "^7.0.0",
     "file-type": "^8.0.0",
     "sax": "^1.2.4",
