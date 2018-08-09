@@ -128,7 +128,7 @@
     "sax": "^1.2.4",
     "xml2js": "^0.4.19",
     "js-yaml": "^3.10.0",
-    "pify": "^3.0.0"
+    "pify": "^4.0.0"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",
