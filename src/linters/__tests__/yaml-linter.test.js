@@ -23,7 +23,8 @@ describe("yaml-linter", () => {
     path: path.join(__dirname, "invalid.yaml")
   };
 
-  it("should works with valid file", () => yamlLinter(validFile));
+  it("should works with valid file", () =>
+    expect(() => yamlLinter(validFile)).not.toThrow());
 
   it("should throw error with invalid file", () => {
     expect.assertions(1);

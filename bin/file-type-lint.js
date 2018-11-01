@@ -24,6 +24,10 @@ const cli = meow(
 
         Allow linting of node_modules, bower_components and vendor.
 
+      --ignore-case, -ic
+      
+        Ignore case of extensions (no errors for 'image.svg', 'image.SVG', 'image.sVg').
+
       --ignore-path, -i
 
         Path to a file containing patterns that describe files to ignore. The
@@ -47,6 +51,9 @@ const cli = meow(
       "disable-default-ignores": {
         alias: "di",
         type: "boolean"
+      },
+      "ignore-case": {
+        alias: "ic"
       },
       "ignore-path": {
         alias: "i",
@@ -72,6 +79,10 @@ if (cli.flags.version || cli.flags.v) {
 }
 
 const optionsBase = {};
+
+if (cli.flags.ignoreCase) {
+  optionsBase.ignoreCase = cli.flags.ignoreCase;
+}
 
 if (cli.flags.ignorePath) {
   optionsBase.ignorePath = cli.flags.ignorePath;
@@ -120,7 +131,7 @@ Promise.resolve()
     return linted;
   })
   .catch(error => {
-    console.log(error.stack || error); // eslint-disable-line no-console
+    console.log(error.stack || error);
 
     const exitCode = typeof error.code === "number" ? error.code : 1;
 

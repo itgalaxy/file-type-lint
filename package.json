@@ -1,6 +1,6 @@
 {
   "name": "file-type-lint",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Lint file types based on content",
   "keywords": [
     "mime",
@@ -122,47 +122,47 @@
   "dependencies": {
     "meow": "^5.0.0",
     "get-stdin": "^6.0.0",
-    "ignore": "^3.3.7",
+    "ignore": "^5.0.3",
     "globby": "^7.0.0",
-    "file-type": "^8.0.0",
+    "file-type": "^10.3.0",
     "sax": "^1.2.4",
     "xml2js": "^0.4.19",
-    "js-yaml": "^3.10.0",
-    "pify": "^3.0.0"
+    "js-yaml": "^3.12.0",
+    "pify": "^4.0.1"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",
-    "babel-eslint": "^8.2.2",
-    "eslint": "^4.1.1",
-    "eslint-plugin-ava": "^4.2.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-itgalaxy": "^67.0.0",
-    "eslint-plugin-jest": "^21.1.0",
-    "eslint-plugin-jsx-a11y": "^6.0.0",
-    "eslint-plugin-lodash": "^2.4.3",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-prettier": "^2.1.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^7.1.0",
-    "eslint-plugin-unicorn": "^4.0.2",
-    "express": "^4.16.2",
-    "jest": "^22.0.3",
-    "husky": "^0.14.1",
-    "lint-staged": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-ava": "^5.1.1",
+    "eslint-plugin-html": "^4.0.5",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-itgalaxy": "^86.0.0",
+    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-lodash": "^3.1.0",
+    "eslint-plugin-markdown": "^1.0.0-rc.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-unicorn": "^6.0.1",
+    "jest": "^23.6.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.0",
     "npm-run-all": "^4.0.1",
-    "npmpub": "^3.1.0",
+    "npmpub": "^4.0.1",
     "prettier": "^1.5.2",
-    "remark-cli": "^5.0.0",
-    "remark-preset-lint-itgalaxy": "^12.0.0"
+    "remark-cli": "^6.0.0",
+    "remark-preset-lint-itgalaxy": "^13.0.0"
   },
   "scripts": {
     "precommit": "lint-staged",
     "lint:prettify": "prettier --list-different '{src,bin}/**/*.{js,mjs,jsx,md}' '*.{js,mjs,jsx,md}'",
-    "lint:script": "eslint --cache --report-unused-disable-directives . --ignore-path .gitignore",
-    "lint:markdown": "remark . -i .gitignore -f -q",
+    "lint:js": "eslint . --cache --report-unused-disable-directives --ignore-path .gitignore --ext 'js,.mjs,.jsx,.md'",
+    "lint:md": "remark . -i .gitignore -f -q",
     "lint": "npm-run-all -l -p lint:**",
     "prettify": "npm run lint:prettify -- --write",
-    "fix:script": "npm run lint:script -- --fix",
+    "fix:js": "npm run lint:js -- --fix",
     "fix": "npm-run-all -l prettify -p 'fix:**'",
     "pretest": "npm run lint",
     "test": "npm run test-only",
@@ -176,12 +176,23 @@
     "extends": [
       "plugin:itgalaxy/jest",
       "plugin:itgalaxy/esnext",
-      "plugin:itgalaxy/node"
+      "plugin:itgalaxy/node",
+      "plugin:itgalaxy/markdown"
     ],
     "overrides": [
       {
+        "rules": {
+          "import/no-unresolved": [
+            "error",
+            {
+              "ignore": [
+                "file-type-lint"
+              ]
+            }
+          ]
+        },
         "files": [
-          "**/__tests__/**/*.js"
+          "**/*.md"
         ]
       }
     ],

@@ -23,7 +23,8 @@ describe("xml-linter", () => {
     path: path.join(__dirname, "invalid.xml")
   };
 
-  it("should works with valid file", () => xmlLinter(validFile));
+  it("should works with valid file", () =>
+    expect(() => xmlLinter(validFile)).not.toThrow());
 
   it("should throw error with invalid file", () => {
     expect.assertions(1);

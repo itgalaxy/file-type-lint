@@ -23,7 +23,8 @@ describe("svg-linter", () => {
     path: path.join(__dirname, "invalid.svg")
   };
 
-  it("should works with valid file", () => svgLinter(validFile));
+  it("should works with valid file", () =>
+    expect(() => svgLinter(validFile)).not.toThrow());
 
   it("should throw error with invalid file", () => {
     expect.assertions(1);

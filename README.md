@@ -29,19 +29,25 @@ const fileTypeLint = require("file-type-lint");
 
 fileTypeLint({
   files: "**/*"
-}).catch(result => {
-  console.log(result.errored); // If `true` when contain error
-  console.log(result.errors); // Array of errors
-});
+})
+  .then(result => {
+    console.log(result.errored); // If `true` when contain error
+    console.log(result.errors); // Array of errors
+
+    return result;
+  })
+  .catch(error => {
+    throw error;
+  });
 ```
 
 ## Roadmap
 
-* Formatters.
-* Improve error readability.
-* Less sync operation.
-* More tests (100% coverage).
-* Documentation.
+- Formatters.
+- Improve error readability.
+- Less sync operation.
+- More tests (100% coverage).
+- Documentation.
 
 ## Contribution
 

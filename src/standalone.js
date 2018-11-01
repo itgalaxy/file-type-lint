@@ -33,7 +33,7 @@ function standalone(options) {
     ]);
   }
 
-  const result = { errored: false, errors: [] };
+  const ignoreCase = options.ignoreCase || false;
 
   // The ignorer will be used to filter file paths after the glob is checked,
   // before any files are actually read
@@ -57,22 +57,29 @@ function standalone(options) {
     .add(ignoreText)
     .add(ignorePattern);
 
-  // Ignore unsupported extensions
-  const ignoredExtensions = supportedFileTypes.join(",");
+  const result = { errored: false, errors: [] };
 
   return Promise.resolve()
     .then(() =>
       globby(patterns, {
         absolute: true,
         dot: true,
-        ignore: [`!{**/*,*}.{${ignoredExtensions}}`],
+        nocase: true,
         onlyFiles: true
       })
     )
     .then(filePaths => {
+      if (filePaths.length === 0) {
+        return [];
+      }
+
       // The ignorer filter needs to check paths relative to cwd
-      // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
-      const filteredFilePaths = ignorer.filter(filePaths);
+      const filteredFilePaths = ignorer
+        .filter(
+          // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
+          filePaths.map(filePath => path.relative(process.cwd(), filePath))
+        )
+        .map(filePath => path.join(process.cwd(), filePath));
 
       if (filteredFilePaths.length === 0) {
         return [];
@@ -82,11 +89,23 @@ function standalone(options) {
     })
     .then(filePaths =>
       Promise.all(
-        filePaths.map(filePath =>
-          fsP
-            .readFile(filePath)
+        filePaths.map(filePath => {
+          const origExt = path.extname(filePath).slice(1);
+          const ext = origExt.toLowerCase();
+
+          if (!supportedFileTypes.includes(ext)) {
+            return Promise.resolve();
+          }
+
+          return Promise.resolve()
+            .then(() => fsP.readFile(filePath))
             .then(buffer => {
-              const ext = path.extname(filePath).slice(1);
+              if (!ignoreCase && !["Z"].includes(ext) && ext !== origExt) {
+                throw new Error(
+                  `Extension of "${filePath}" file should be in lowercase format.`
+                );
+              }
+
               const file = {
                 buffer,
                 path: path.resolve(filePath)
@@ -151,8 +170,8 @@ function standalone(options) {
 
               return file;
             })
-            .catch(error => result.errors.push(error))
-        )
+            .catch(error => result.errors.push(error));
+        })
       )
     )
     .then(() => {

@@ -9,6 +9,7 @@ module.exports = {
   "*.{md,markdown,mdown,mkdn,mkd,mdwn,mkdown,ron}": [
     "prettier --list-different",
     "remark -f -q",
+    "eslint --report-unused-disable-directives",
     "git add"
   ]
 };

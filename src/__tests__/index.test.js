@@ -3,7 +3,7 @@
 const api = require("..");
 
 describe("api", () => {
-  it("are exported", () => {
+  it("is exported", () => {
     expect.assertions(2);
 
     expect(api.lint).not.toBeNull();
