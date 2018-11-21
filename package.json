@@ -140,7 +140,7 @@
     "eslint-plugin-itgalaxy": "^86.0.0",
     "eslint-plugin-jest": "^21.26.2",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-lodash": "^3.1.0",
+    "eslint-plugin-lodash": "^4.0.0",
     "eslint-plugin-markdown": "^1.0.0-rc.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
