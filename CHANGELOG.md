@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 2.1.0 - 2019-01-28
+
+- Added: `glb`, `ics` and `mpc` extensions.
+- Chore: update dependencies.
+
 ## 2.0.0 - 2018-11-01
 
 - Added: `--ignore-case` option for CLI and `ignoreCase` for node API.

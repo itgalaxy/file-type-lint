@@ -1,8 +1,8 @@
 "use strict";
 
-const xmlLinter = require("../xml-linter");
 const path = require("path");
 const fs = require("fs");
+const xmlLinter = require("../xml-linter");
 
 const fixturesDir = path.join(__dirname, "../../__tests__/fixtures");
 

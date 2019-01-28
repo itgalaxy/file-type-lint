@@ -1,8 +1,8 @@
 "use strict";
 
-const yamlLinter = require("../yaml-linter");
 const path = require("path");
 const fs = require("fs");
+const yamlLinter = require("../yaml-linter");
 
 const fixturesDir = path.join(__dirname, "../../__tests__/fixtures");
 

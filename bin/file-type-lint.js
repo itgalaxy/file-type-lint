@@ -131,9 +131,10 @@ Promise.resolve()
     return linted;
   })
   .catch(error => {
+    // eslint-disable-next-line no-console
     console.log(error.stack || error);
 
     const exitCode = typeof error.code === "number" ? error.code : 1;
 
-    process.exit(exitCode); // eslint-disable-line no-process-exit
+    process.exit(exitCode);
   });

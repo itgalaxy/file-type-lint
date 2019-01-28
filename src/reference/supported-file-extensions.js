@@ -93,6 +93,9 @@ module.exports = [
   "heic",
   "ktx",
   "dcm",
+  "mpc",
+  "ics",
+  "glb",
   // Additional types
   "svg",
   "yml",
