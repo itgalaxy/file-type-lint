@@ -76,7 +76,6 @@ function standalone(options) {
       // The ignorer filter needs to check paths relative to cwd
       const filteredFilePaths = ignorer
         .filter(
-          // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
           filePaths.map(filePath => path.relative(process.cwd(), filePath))
         )
         .map(filePath => path.join(process.cwd(), filePath));

@@ -1,7 +1,7 @@
 "use strict";
 
-const standalone = require("../standalone");
 const path = require("path");
+const standalone = require("../standalone");
 
 const fixturesDir = path.join(__dirname, "fixtures");
 

@@ -1,8 +1,8 @@
 "use strict";
 
-const svgLinter = require("../svg-linter");
 const path = require("path");
 const fs = require("fs");
+const svgLinter = require("../svg-linter");
 
 const fixturesDir = path.join(__dirname, "../../__tests__/fixtures");
 
