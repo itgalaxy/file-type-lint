@@ -145,8 +145,3 @@ stats*.json
 composer.phar
 vendor
 !composer.lock
-
-# Applcation
-build
-src/shared/fonts/icon-font.*
-src/shared/styles/fonts/_icon-font.scss

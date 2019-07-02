@@ -64,7 +64,6 @@ function standalone(options) {
       globby(patterns, {
         absolute: true,
         dot: true,
-        nocase: true,
         onlyFiles: true
       })
     )
