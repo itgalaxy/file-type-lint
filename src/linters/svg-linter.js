@@ -9,7 +9,6 @@ function svgLinter(file) {
         new Promise((resolve, reject) => {
           const parser = sax.parser(true);
 
-          // eslint-disable-next-line unicorn/prefer-add-event-listener
           parser.onerror = function(error) {
             reject(error);
           };

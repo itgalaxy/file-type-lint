@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 3.0.0 - 2019-07-02
+
+- Added: `apng`, `orf`, `arw`, `dng`, `nef`, `rw2`, `raf`, `pcap`, `dsf`,`lnk`, `alias`, `voc`, `ac3`,`3g2`,`m4v`,`m4p`,`m4b`, `f4v`, `f4p`, `f4a`, `f4b` formats.
+- Chore: update `file-type` to `^12.0.0` version.
+- Changed: minimum require node.js version is `8.9.0`.
+
 ## 2.1.0 - 2019-01-28
 
 - Added: `glb`, `ics` and `mpc` extensions.

@@ -4,7 +4,6 @@
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/file-type-lint/master.svg?label=build)](https://travis-ci.org/itgalaxy/file-type-lint)
 [![dependencies Status](https://david-dm.org/itgalaxy/file-type-lint/status.svg)](https://david-dm.org/itgalaxy/file-type-lint)
 [![devDependencies Status](https://david-dm.org/itgalaxy/file-type-lint/dev-status.svg)](https://david-dm.org/itgalaxy/file-type-lint?type=dev)
-[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/file-type-lint.svg)](https://greenkeeper.io)
 
 Lint file types based on their content.
 

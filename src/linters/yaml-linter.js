@@ -27,9 +27,7 @@ function yamlLinter(file) {
           }
         } catch (YAMLError) {
           YAMLError.fileName = file.path;
-          YAMLError.reason = `File "${YAMLError.path}" contain error "${
-            YAMLError.reason
-          }".`;
+          YAMLError.reason = `File "${YAMLError.path}" contain error "${YAMLError.reason}".`;
 
           throw YAMLError;
         }
@@ -40,7 +38,7 @@ function yamlLinter(file) {
       }
     }
 
-    return Promise.resolve();
+    return output;
   });
 }
 
