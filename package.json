@@ -1,6 +1,6 @@
 {
   "name": "file-type-lint",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Lint file types based on content",
   "keywords": [
     "mime",
@@ -120,19 +120,19 @@
   "bugs": "https://github.com/itgalaxy/file-type-lint/issues",
   "main": "index.js",
   "dependencies": {
-    "meow": "^5.0.0",
-    "get-stdin": "^7.0.0",
-    "ignore": "^5.1.2",
-    "globby": "^10.0.0",
     "file-type": "^12.0.0",
-    "sax": "^1.2.4",
-    "xml2js": "^0.4.19",
+    "get-stdin": "^7.0.0",
+    "globby": "^10.0.0",
+    "ignore": "^5.1.2",
     "js-yaml": "^3.13.1",
-    "pify": "^4.0.1"
+    "meow": "^5.0.0",
+    "pify": "^4.0.1",
+    "sax": "^1.2.4",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "del-cli": "^2.0.0",
     "babel-eslint": "^10.0.2",
+    "del-cli": "^2.0.0",
     "eslint": "^6.0.1",
     "eslint-plugin-ava": "^7.1.0",
     "eslint-plugin-html": "^6.0.0",
@@ -146,14 +146,14 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-unicorn": "^9.1.1",
-    "jest": "^24.8.0",
     "husky": "^3.0.0",
+    "jest": "^24.8.0",
     "lint-staged": "^9.0.1",
     "npm-run-all": "^4.1.5",
-    "npmpub": "^4.1.0",
     "prettier": "^1.18.2",
     "remark-cli": "^6.0.1",
-    "remark-preset-lint-itgalaxy": "^14.0.0"
+    "remark-preset-lint-itgalaxy": "^14.0.0",
+    "standard-version": "^6.0.1"
   },
   "scripts": {
     "lint:prettier": "prettier --ignore-path .gitignore --list-different '{src,bin}/**/*.{js,mjs,jsx,md}' '*.{js,mjs,jsx,md}'",
@@ -167,7 +167,7 @@
     "test:only": "jest",
     "test:coverage": "jest --coverage",
     "test": "npm run test:coverage",
-    "release": "npmpub"
+    "release": "standard-version"
   },
   "engines": {
     "node": ">= 8.9.0"
