@@ -21,13 +21,13 @@ matrix:
     - node_js: "12"
       script: npm run $JOB_PART
       env: JOB_PART=pretest
+    - node_js: "14"
+      script: npm run $JOB_PART
+      env: JOB_PART=test
     - node_js: "12"
       script: npm run $JOB_PART
       env: JOB_PART=test
     - node_js: "10"
-      script: npm run $JOB_PART
-      env: JOB_PART=test
-    - node_js: "8"
       script: npm run $JOB_PART
       env: JOB_PART=test
 

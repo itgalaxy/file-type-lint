@@ -6,10 +6,10 @@ function xmlLinter(file) {
   return Promise.resolve()
     .then(
       () =>
-        new Promise(resolve => {
+        new Promise((resolve) => {
           const parser = new xml2js.Parser();
 
-          parser.parseString(file.buffer, error => {
+          parser.parseString(file.buffer, (error) => {
             if (error) {
               throw error;
             }
@@ -18,7 +18,7 @@ function xmlLinter(file) {
           });
         })
     )
-    .catch(error => {
+    .catch((error) => {
       let [message, line, column, char] = error.message.split("\n");
 
       if (!message) {

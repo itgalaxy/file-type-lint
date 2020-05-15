@@ -1,15 +1,13 @@
 "use strict";
 
 const path = require("path");
+const util = require("util");
 const fs = require("fs");
-const pify = require("pify");
 const ignore = require("ignore");
 const globby = require("globby");
-const fileType = require("file-type");
+const FileType = require("file-type");
 const supportedFileTypes = require("./reference/supported-file-extensions");
 const linters = require("./linters");
-
-const fsP = pify(fs);
 
 const DEFAULT_IGNORE_FILENAME = ".file-type-lintignore";
 const FILE_NOT_FOUND_ERROR_CODE = "ENOENT";
@@ -29,7 +27,7 @@ function standalone(options) {
       "!**/bower_components/**",
       "!./bower_components/**",
       "!**/vendor/**",
-      "!./vendor/**"
+      "!./vendor/**",
     ]);
   }
 
@@ -44,8 +42,8 @@ function standalone(options) {
   let ignoreText = "";
 
   try {
-    // eslint-disable-next-line no-sync
-    ignoreText = fsP.readFileSync(absoluteIgnoreFilePath, "utf8");
+    // eslint-disable-next-line node/no-sync
+    ignoreText = fs.readFileSync(absoluteIgnoreFilePath, "utf8");
   } catch (error) {
     if (error.code !== FILE_NOT_FOUND_ERROR_CODE) {
       throw error;
@@ -53,9 +51,7 @@ function standalone(options) {
   }
 
   const ignorePattern = options.ignorePattern || [];
-  const ignorer = ignore()
-    .add(ignoreText)
-    .add(ignorePattern);
+  const ignorer = ignore().add(ignoreText).add(ignorePattern);
 
   const result = { errored: false, errors: [] };
 
@@ -64,10 +60,10 @@ function standalone(options) {
       globby(patterns, {
         absolute: true,
         dot: true,
-        onlyFiles: true
+        onlyFiles: true,
       })
     )
-    .then(filePaths => {
+    .then((filePaths) => {
       if (filePaths.length === 0) {
         return [];
       }
@@ -75,9 +71,9 @@ function standalone(options) {
       // The ignorer filter needs to check paths relative to cwd
       const filteredFilePaths = ignorer
         .filter(
-          filePaths.map(filePath => path.relative(process.cwd(), filePath))
+          filePaths.map((filePath) => path.relative(process.cwd(), filePath))
         )
-        .map(filePath => path.join(process.cwd(), filePath));
+        .map((filePath) => path.join(process.cwd(), filePath));
 
       if (filteredFilePaths.length === 0) {
         return [];
@@ -85,9 +81,9 @@ function standalone(options) {
 
       return filteredFilePaths;
     })
-    .then(filePaths =>
+    .then((filePaths) =>
       Promise.all(
-        filePaths.map(filePath => {
+        filePaths.map(async (filePath) => {
           const origExt = path.extname(filePath).slice(1);
           const ext = origExt.toLowerCase();
 
@@ -95,80 +91,78 @@ function standalone(options) {
             return Promise.resolve();
           }
 
-          return Promise.resolve()
-            .then(() => fsP.readFile(filePath))
-            .then(buffer => {
-              if (!ignoreCase && !["Z"].includes(ext) && ext !== origExt) {
-                throw new Error(
-                  `Extension of "${filePath}" file should be in lowercase format.`
-                );
-              }
+          const buffer = await util.promisify(fs.readFile)(filePath);
+          const file = { buffer, path: path.resolve(filePath) };
 
-              const file = {
-                buffer,
-                path: path.resolve(filePath)
-              };
+          if (!ignoreCase && !["Z"].includes(ext) && ext !== origExt) {
+            result.errors.push(
+              new Error(
+                `Extension of "${filePath}" file should be in lowercase format.`
+              )
+            );
 
-              if (ext === "svg") {
-                file.type = {
-                  ext,
-                  mime: "image/svg+xml"
-                };
+            return file;
+          }
 
-                return file;
-              }
+          if (ext === "svg") {
+            try {
+              await linters.xmlLinter(file);
+            } catch (error) {
+              result.errors.push(error);
+            }
 
-              if (ext === "yml" || ext === "yaml") {
-                file.type = {
-                  ext,
-                  mime: "text/yaml"
-                };
+            return file;
+          }
 
-                return file;
-              }
+          if (ext === "yml" || ext === "yaml") {
+            try {
+              await linters.yamlLinter(file);
+            } catch (error) {
+              result.errors.push(error);
+            }
 
-              const type = fileType(buffer);
+            return file;
+          }
 
-              file.type = type;
+          const type = await FileType.fromBuffer(buffer);
 
-              if (!file.type) {
-                throw new Error(
-                  `File "${path.resolve(filePath)}" has invalid extension.`
-                );
-              }
+          file.type = type;
 
-              if (ext !== file.type.ext) {
-                throw new Error(
-                  `File "${path.resolve(
-                    filePath
-                  )}" has invalid extension. It should be "${type.ext}".`
-                );
-              }
+          if (!file.type) {
+            result.errors.push(
+              new Error(
+                `File "${path.resolve(filePath)}" has invalid extension.`
+              )
+            );
 
-              return file;
-            })
-            .then(file => {
-              const { type } = file;
+            return file;
+          }
 
-              if (!type || !type.mime) {
-                return file;
-              }
+          if (ext !== file.type.ext) {
+            result.errors.push(
+              new Error(
+                `File "${path.resolve(
+                  filePath
+                )}" has invalid extension. It should be "${type.ext}".`
+              )
+            );
 
-              if (type.mime === "application/xml") {
-                return linters.xmlLinter(file);
-              }
+            return file;
+          }
 
-              if (type.mime === "image/svg+xml") {
-                return linters.svgLinter(file);
-              }
+          if (!type || !type.mime) {
+            return file;
+          }
 
-              if (type.mime === "text/yaml") {
-                return linters.yamlLinter(file);
-              }
+          if (type.mime === "application/xml") {
+            try {
+              await linters.xmlLinter(file);
+            } catch (error) {
+              result.errors.push(error);
+            }
+          }
 
-              return file;
-            })
-            .catch(error => result.errors.push(error));
+          return file;
         })
       )
     )

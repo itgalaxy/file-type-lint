@@ -2,7 +2,7 @@
 
 module.exports = {
   parserOptions: {
-    sourceType: "script"
+    sourceType: "script",
   },
   extends: ["plugin:itgalaxy/esnext", "plugin:itgalaxy/node"],
   overrides: [
@@ -13,8 +13,8 @@ module.exports = {
       files: ["**/__tests__/**/*", "**/__mocks__/**/*"],
       rules: {
         // Allow to use `console` (example - `mocking`)
-        "no-console": "off"
-      }
+        "no-console": "off",
+      },
     },
 
     // Markdown
@@ -23,8 +23,8 @@ module.exports = {
       files: ["**/*.md"],
       parserOptions: {
         ecmaFeatures: {
-          impliedStrict: true
-        }
+          impliedStrict: true,
+        },
       },
       rules: {
         strict: "off",
@@ -36,9 +36,9 @@ module.exports = {
         "import/no-unresolved": "off",
         "node/no-unpublished-require": "off",
         "node/no-unpublished-import": "off",
-        "node/no-unsupported-features/es-syntax": "off"
-      }
-    }
+        "node/no-unsupported-features/es-syntax": "off",
+      },
+    },
   ],
-  root: true
+  root: true,
 };

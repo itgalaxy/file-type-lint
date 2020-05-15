@@ -7,5 +7,5 @@ const yamlLinter = require("./yaml-linter");
 module.exports = {
   svgLinter,
   xmlLinter,
-  yamlLinter
+  yamlLinter,
 };

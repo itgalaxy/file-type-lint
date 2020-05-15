@@ -1,0 +1,4 @@
+.idea
+coverage
+node_modules
+src/__tests__/fixtures/invalid.*

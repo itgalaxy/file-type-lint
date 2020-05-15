@@ -14,7 +14,7 @@ function yamlLinter(file) {
           output = [];
           yaml.loadAll(
             file.buffer,
-            doc => {
+            (doc) => {
               output.push(doc);
             },
             {}
