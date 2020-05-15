@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 4.0.0 - 2020-05-15
+
+- Chore: update `file-type` to `^14.3.0` version.
+- Changed: minimum require node.js version is `10.13.0`.
+
 ## 3.0.0 - 2019-07-02
 
 - Added: `apng`, `orf`, `arw`, `dng`, `nef`, `rw2`, `raf`, `pcap`, `dsf`,`lnk`, `alias`, `voc`, `ac3`,`3g2`,`m4v`,`m4p`,`m4b`, `f4v`, `f4p`, `f4a`, `f4b` formats.
