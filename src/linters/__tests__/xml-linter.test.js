@@ -6,9 +6,9 @@ const xmlLinter = require("../xml-linter");
 
 const fixturesDir = path.join(__dirname, "../../__tests__/fixtures");
 
-// eslint-disable-next-line no-sync
+// eslint-disable-next-line node/no-sync
 const validXMLContent = fs.readFileSync(path.join(fixturesDir, "valid.xml"));
-// eslint-disable-next-line no-sync
+// eslint-disable-next-line node/no-sync
 const invalidXMLContent = fs.readFileSync(
   path.join(fixturesDir, "invalid.xml")
 );
@@ -16,11 +16,11 @@ const invalidXMLContent = fs.readFileSync(
 describe("xml-linter", () => {
   const validFile = {
     buffer: Buffer.from(validXMLContent),
-    path: path.join(__dirname, "valid.xml")
+    path: path.join(__dirname, "valid.xml"),
   };
   const unvalidFile = {
     buffer: Buffer.from(invalidXMLContent),
-    path: path.join(__dirname, "invalid.xml")
+    path: path.join(__dirname, "invalid.xml"),
   };
 
   it("should works with valid file", () =>
@@ -29,7 +29,7 @@ describe("xml-linter", () => {
   it("should throw error with invalid file", () => {
     expect.assertions(1);
 
-    return xmlLinter(unvalidFile).catch(error => {
+    return xmlLinter(unvalidFile).catch((error) => {
       expect(error).not.toBeNull();
     });
   });

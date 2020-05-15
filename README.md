@@ -27,15 +27,15 @@ file-type-lint .
 const fileTypeLint = require("file-type-lint");
 
 fileTypeLint({
-  files: "**/*"
+  files: "**/*",
 })
-  .then(result => {
+  .then((result) => {
     console.log(result.errored); // If `true` when contain error
     console.log(result.errors); // Array of errors
 
     return result;
   })
-  .catch(error => {
+  .catch((error) => {
     throw error;
   });
 ```

@@ -9,18 +9,18 @@ function svgLinter(file) {
         new Promise((resolve, reject) => {
           const parser = sax.parser(true);
 
-          parser.onerror = function(error) {
+          parser.onerror = function (error) {
             reject(error);
           };
 
-          parser.onend = function() {
+          parser.onend = function () {
             resolve();
           };
 
           parser.write(file.buffer).close();
         })
     )
-    .catch(error => {
+    .catch((error) => {
       error.fileName = file.path;
       error.message = `File name "${error.fileName}"\n${error.message}`;
 

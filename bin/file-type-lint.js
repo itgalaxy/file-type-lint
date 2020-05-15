@@ -20,12 +20,12 @@ const cli = meow(
 
     Options:
 
-      --disable-default-ignores, --di  
+      --disable-default-ignores, --di
 
         Allow linting of node_modules, bower_components and vendor.
 
       --ignore-case, -ic
-      
+
         Ignore case of extensions (no errors for 'image.svg', 'image.SVG', 'image.sVg').
 
       --ignore-path, -i
@@ -50,23 +50,23 @@ const cli = meow(
     flags: {
       "disable-default-ignores": {
         alias: "di",
-        type: "boolean"
+        type: "boolean",
       },
       "ignore-case": {
-        alias: "ic"
+        alias: "ic",
       },
       "ignore-path": {
         alias: "i",
-        type: "string"
+        type: "string",
       },
       "ignore-pattern": {
-        alias: "ip"
+        alias: "ip",
       },
       version: {
         alias: "v",
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   }
 );
 
@@ -100,29 +100,29 @@ Promise.resolve()
   .then(() => {
     if (cli.input.length !== 0) {
       return Object.assign({}, optionsBase, {
-        files: cli.input
+        files: cli.input,
       });
     }
 
-    return getStdin().then(stdin =>
+    return getStdin().then((stdin) =>
       Object.assign({}, optionsBase, {
-        code: stdin
+        code: stdin,
       })
     );
   })
-  .then(options => {
+  .then((options) => {
     if (!options.files && !options.code) {
       cli.showHelp(0);
     }
 
     return standalone(options);
   })
-  .then(linted => {
+  .then((linted) => {
     if (!linted.errored) {
       return linted;
     }
 
-    linted.errors.forEach(error => {
+    linted.errors.forEach((error) => {
       process.stdout.write(`${error.toString()}\n`);
     });
 
@@ -130,7 +130,7 @@ Promise.resolve()
 
     return linted;
   })
-  .catch(error => {
+  .catch((error) => {
     // eslint-disable-next-line no-console
     console.log(error.stack || error);
 
