@@ -120,7 +120,7 @@
   "bugs": "https://github.com/itgalaxy/file-type-lint/issues",
   "main": "index.js",
   "dependencies": {
-    "file-type": "^14.3.0",
+    "file-type": "^16.5.4",
     "get-stdin": "^8.0.0",
     "globby": "^11.0.0",
     "ignore": "^5.1.4",
